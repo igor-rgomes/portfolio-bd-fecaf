@@ -1,0 +1,52 @@
+CREATE TABLE Alunos (
+    id_aluno INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(255),
+    cpf VARCHAR(11),
+    data_nascimento DATE,
+    endereco VARCHAR(255),
+    telefone VARCHAR(15),
+    email VARCHAR(255)
+);
+
+CREATE TABLE Cursos (
+    id_curso INT PRIMARY KEY AUTO_INCREMENT,
+    nome_curso VARCHAR(255),
+    duracao INT,
+    coordenador VARCHAR(255),
+    descricao TEXT
+);
+
+CREATE TABLE Materias (
+    id_materia INT PRIMARY KEY AUTO_INCREMENT,
+    nome_materia VARCHAR(255),
+    codigo_materia VARCHAR(20),
+    pre_requisitos VARCHAR(255)
+);
+
+CREATE TABLE Professores (
+    id_professor INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(255),
+    cpf VARCHAR(11),
+    titulacao VARCHAR(100),
+    especializacao VARCHAR(100),
+    email VARCHAR(255)
+);
+
+CREATE TABLE Turmas (
+    id_turma INT PRIMARY KEY AUTO_INCREMENT,
+    codigo_turma VARCHAR(20),
+    ano_semestre VARCHAR(10),
+    id_materia INT,
+    id_professor INT,
+    FOREIGN KEY (id_materia) REFERENCES Materias(id_materia),
+    FOREIGN KEY (id_professor) REFERENCES Professores(id_professor)
+);
+
+CREATE TABLE Notas (
+    id_nota INT PRIMARY KEY AUTO_INCREMENT,
+    id_aluno INT,
+    id_materia INT,
+    nota FLOAT,
+    FOREIGN KEY (id_aluno) REFERENCES Alunos(id_aluno),
+    FOREIGN KEY (id_materia) REFERENCES Materias(id_materia)
+);
